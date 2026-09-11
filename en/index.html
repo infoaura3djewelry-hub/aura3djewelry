@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA 3D — Jewelry 3D Printing Service and Silicone Molds</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#111215">
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root { --bg:#111215; --card:rgba(18,19,28,0.45); --gold:#E5C483; --text:#F4F4F6; --muted:#D1D4DC; --font-serif:'Playfair Display',serif; --font-sans:'Montserrat',sans-serif; }
+        body { background-color:var(--bg); color:var(--text); font-family:var(--font-sans); letter-spacing:0.5px; overflow-x:hidden; }
+        
+        /* BACKGROUND VIDEO & IMAGE SYSTEM */
+        .media-bg { position:fixed; top:0; left:0; width:100%; height:100vh; z-index:-2; overflow:hidden; background:linear-gradient(rgba(17,18,21,0.45),rgba(17,18,21,0.65)), url('https://picsum.photos') no-repeat center center fixed; background-size:cover; }
+        .media-bg video { width:100%; height:100%; object-fit:cover; }
+        .media-overlay { position:fixed; top:0; left:0; width:100%; height:100vh; background:linear-gradient(rgba(17,18,21,0.45),rgba(17,18,21,0.65)); z-index:-1; }
+
+        header { display:flex; justify-content:space-between; align-items:center; padding:20px 5%; border-bottom:1px solid rgba(229,196,131,0.2); background:rgba(17,18,21,0.8); backdrop-filter:blur(8px); }
+        .logo { font-family:var(--font-serif); font-size:24px; letter-spacing:3px; text-decoration:none; color:#fff; }
+        .logo span { color:var(--gold); font-size:11px; vertical-align:super; }
+        
+        .nav-container { display:flex; align-items:center; }
+        nav a { color:var(--muted); text-decoration:none; margin-left:20px; font-size:11px; text-transform:uppercase; font-weight:500; transition:0.3s; }
+        nav a:hover { color:var(--gold); }
+        
+        .lang-selector { margin-left:25px; font-size:11px; font-weight:600; color:rgba(255,255,255,0.3); }
+        .lang-selector a { color:var(--muted); text-decoration:none; margin:0 3px; }
+        .lang-selector a.active { color:var(--gold); }
+        
+        .btn-install { background:transparent; border:1px solid var(--gold); color:var(--gold); padding:6px 12px; font-size:10px; text-transform:uppercase; font-weight:600; margin-left:25px; cursor:pointer; display:none; }
+        
+        .hero { text-align:center; padding:80px 5% 30px; max-width:850px; margin:0 auto; }
+        .hero-tag { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--gold); margin-bottom:10px; display:block; font-weight:600; }
+        .hero h1 { font-family:var(--font-serif); font-size:38px; margin-bottom:15px; text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+        .hero h1 em { color:var(--gold); font-style:italic; }
+        .hero p { color:#fff; font-size:14px; line-height:1.6; text-shadow:0 1px 5px rgba(0,0,0,0.9); }
+        
+        .specs { display:flex; justify-content:center; gap:40px; margin:20px auto 50px; text-align:center; }
+        .spec-num { font-family:var(--font-serif); font-size:26px; color:var(--gold); margin-bottom:3px; }
+        .spec-lbl { font-size:10px; text-transform:uppercase; color:#fff; letter-spacing:1px; }
+        
+        .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:25px; max-width:1200px; margin:0 auto 80px; padding:0 5%; }
+        .gate { background:var(--card); padding:40px 30px; border:1px solid rgba(229,196,131,0.15); display:flex; flex-direction:column; justify-content:space-between; backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); box-shadow:0 10px 30px rgba(0,0,0,0.5); }
+        .gate:hover { border-color:var(--gold); background:rgba(18,19,28,0.7); }
+        .gate-meta { font-size:10px; color:var(--gold); text-transform:uppercase; margin-bottom:10px; font-weight:600; }
+        .gate h2 { font-family:'Playfair Display',serif; font-size:24px; margin-bottom:12px; }
+        .gate p { color:var(--muted); font-size:13px; line-height:1.6; margin-bottom:30px; }
+        
+        .btn { display:inline-block; text-decoration:none; font-size:11px; text-transform:uppercase; padding:14px 25px; text-align:center; transition:0.3s; }
+        .btn.primary { background:var(--gold); color:#111215; font-weight:600; }
+        .btn.primary:hover { background:transparent; color:var(--gold); border:1px solid var(--gold); }
+        .btn.secondary { color:var(--text); border:1px solid rgba(255,255,255,0.3); background:rgba(0,0,0,0.4); }
+        .btn.secondary:hover { border-color:var(--gold); color:var(--gold); }
+        
+        footer { padding:30px 5%; border-top:1px solid rgba(229,196,131,0.1); display:flex; justify-content:space-between; color:var(--muted); font-size:10px; text-transform:uppercase; background:rgba(17,18,21,0.9); }
+        @media (max-width:768px) { .hero h1 { font-size:30px; } .grid { grid-template-columns:1fr; } footer { flex-direction:column; gap:10px; text-align:center; } .specs { gap:20px; } .nav-container { flex-direction:column; gap:5px; } .btn-install { margin-left:0; } }
+    </style>
+</head>
+<body>
+
+    <div class="media-bg">
+        <video autoplay loop muted playsinline>
+            <source src="https://mixkit.co" type="video/mp4">
+            <source src="../sfondo.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="media-overlay"></div>
+
+    <header>
+        <div class="logo">AURA<span>3D</span></div>
+        <div class="nav-container">
+            <nav>
+              <a href="./index.html">Atelier</a>
+              <a href="./jewelry-3d-printing.html">3D Printing</a>
+              <a href="./silicone-molds.html">Molds</a>
+              <a href="./cad-design.html">CAD Studio</a>
+              <a href="./instant-quote.html">Instant Quote</a>
+            </nav>
+
+            <div class="lang-selector">
+                <a href="../index.html">IT</a> / 
+                <a href="./index.html" class="active">EN</a> / 
+                <a href="../fr/index.html">FR</a>
+            </div>
+            <button id="installApp" class="btn-install">App</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <span class="hero-tag">High-End Jewelry Service</span>
+        <h1>Digital manufacturing for <em>Fine Jewelry</em>.</h1>
+        <p>Integrated high-precision 3D printing solutions in castable resins and stable silicone rubber molds for lost-wax injection worldwide.</p>
+    </section>
+
+    <section class="specs">
+        <div><div class="spec-num">16 μm</div><div class="spec-lbl">Z-Axis</div></div>
+        <div><div class="spec-num">45A</div><div class="spec-lbl">Molds</div></div>
+        <div><div class="spec-num">0%</div><div class="spec-lbl">Ash Residue</div></div>
+    </section>
+
+    <main class="grid">
+        <div class="gate">
+            <div>
+                <div class="gate-meta">Fast Production</div>
+                <h2>3D Printing & Molding</h2>
+                <p>Upload your STL/3DM files. We print your prototype and manufacture the silicone mold ready for the wax injector.</p>
+            </div>
+            <a href="./instant-quote.html" class="btn primary">Instant Quote</a>
+        </div>
+        <div class="gate">
+            <div>
+                <div class="gate-meta">Technical Development</div>
+                <h2>CAD Studio & Manufacturing</h2>
+                <p>Development from sketches or concepts. Professional jewelry 3D modeling and mold engineering for mass production.</p>
+            </div>
+            <a href="./cad-design.html" class="btn secondary">Request Project</a>
+        </div>
+    </main>
+
+    <footer>
+        <div>&copy; 2026 AURA 3D Tech Jewelry Service</div>
+        <div>New York — London — Antwerp</div>
+    </footer>
+
+    <script>
+        let deferredPrompt; const installBtn = document.getElementById('installApp');
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'inline-block'; });
+        installBtn.addEventListener('click', async () => { if (deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; installBtn.style.display = 'none'; } });
+    </script>
+</body>
+</html>

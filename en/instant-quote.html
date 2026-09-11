@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA 3D — Configuration</title>
+    <link rel="manifest" href="../manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root { --bg:#111215; --card:rgba(18,19,28,0.45); --gold:#E5C483; --text:#F4F4F6; --muted:#D1D4DC; --border:rgba(229,196,131,0.25); }
+        body { background-color:var(--bg); color:var(--text); font-family:'Montserrat',sans-serif; letter-spacing:0.5px; overflow-x:hidden; }
+        .media-bg { position:fixed; top:0; left:0; width:100%; height:100vh; z-index:-2; overflow:hidden; background:linear-gradient(rgba(17,18,21,0.35),rgba(17,18,21,0.55)), url('https://picsum.photos') no-repeat center center fixed; background-size:cover; }
+        .media-bg video { width:100%; height:100%; object-fit:cover; }
+        .media-overlay { position:fixed; top:0; left:0; width:100%; height:100vh; background:linear-gradient(rgba(17,18,21,0.35),rgba(17,18,21,0.55)); z-index:-1; }
+        header { padding:20px 5%; border-bottom:1px solid var(--border); background:rgba(17,18,21,0.8); backdrop-filter:blur(8px); }
+        .logo { font-family:'Playfair Display',serif; font-size:24px; letter-spacing:3px; text-decoration:none; color:#fff; }
+        .logo span { color:var(--gold); font-size:11px; vertical-align:super; }
+        .container { max-width:1100px; margin:40px auto; padding:0 5%; display:grid; grid-template-columns:1.6fr 1fr; gap:30px; }
+        h1 { font-family:'Playfair Display',serif; font-size:28px; margin-bottom:20px; }
+        .panel, .summary { background:var(--card); padding:30px; border:1px solid var(--border); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); box-shadow:0 20px 50px rgba(0,0,0,0.5); }
+        .form-group { margin-bottom:20px; }
+        label { display:block; font-size:11px; text-transform:uppercase; color:var(--gold); letter-spacing:1px; margin-bottom:8px; font-weight:600; }
+        .upload-box { border:2px dashed var(--gold); padding:20px; text-align:center; cursor:pointer; background:rgba(42,44,53,0.3); }
+        input[type="number"], select { width:100%; background:rgba(42,44,53,0.85); border:1px solid #5A5D6A; padding:12px; color:#fff; font-family:inherit; outline:none; font-size:13px; }
+        input:focus, select:focus { border-color:var(--gold); background:rgba(53,56,66,0.95); }
+        .flex-row { display:flex; justify-content:space-between; align-items:flex-start; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+        .switch { position:relative; display:inline-block; width:44px; height:22px; }
+        .switch input { opacity:0; width:0; height:0; }
+        .slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); transition:.3s; border-radius:22px; border:1px solid var(--border); }
+        .slider:before { position:absolute; content:""; height:14px; width:14px; left:3px; bottom:3px; background:var(--muted); transition:.3s; border-radius:50%; }
+        input:checked + .slider { background:var(--gold); }
+        input:checked + .slider:before { transform:translateX(22px); background:#111215; }
+        .summary { border-color:var(--gold); height:fit-content; }
+        .summary h3 { font-family:'Playfair Display',serif; font-size:20px; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:5px; }
+        .price-row { display:flex; justify-content:space-between; margin-bottom:12px; font-size:13px; color:var(--muted); }
+        .price-total { display:flex; justify-content:space-between; margin-top:20px; padding-top:10px; border-top:1px solid var(--border); font-size:16px; font-weight:600; }
+        .price-total span { color:var(--gold); }
+        .btn-order { display:block; width:100%; background:var(--gold); color:#111215; text-align:center; padding:14px; font-size:11px; text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-top:20px; border:none; cursor:pointer; }
+        @media (max-width:768px) { .container { grid-template-columns:1fr; } }
+    </style>
+</head>
+<body>
+    <div class="media-bg">
+        <video autoplay loop muted playsinline>
+            <source src="https://mixkit.co" type="video/mp4">
+            <source src="../sfondo.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="media-overlay"></div>
+    <header><a href="./index.html" class="logo">AURA<span>3D</span></a></header>
+    <div class="container">
+        <div>
+            <h1>Configuration</h1>
+            <div class="panel">
+                <div class="form-group">
+                    <label>Model (.STL / .3DM)</label>
+                    <div class="upload-box" onclick="document.getElementById('file-input').click()">
+                        <input type="file" id="file-input" accept=".stl,.3dm" onchange="updateFile(this)">
+                        <p id="file-text">Select or drag the 3D file</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Resin Type</label>
+                    <select id="resina" onchange="calculatePrice()">
+                        <option value="fusibile" data-price="25">Blue Castable Resin (Direct Casting) — €25/pc</option>
+                        <option value="hd-gomma" data-price="35">Grey HD Resin for Master Molds — €35/pc</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quantity of Copies</label>
+                    <input type="number" id="quantita" value="1" min="1" onchange="calculatePrice()">
+                </div>
+                <div class="form-group" style="margin-top:25px;">
+                    <label>Laboratory Options</label>
+                    <div class="flex-row">
+                        <div>
+                            <p style="font-size:13px; font-weight:500;">Technical File Check</p>
+                            <p style="font-size:11px; color:var(--gold); margin-bottom:4px;">Verify wall thickness and mesh (+ €10)</p>
+                            <p style="font-size:10px; color:#A1A5B3; line-height:1.3; max-width:90%;">* In case of structural errors, the CAD repair will be quoted with an extra fee.</p>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="controllo" onchange="calculatePrice()"><span class="slider"></span></label>
+                    </div>
+                    <div class="flex-row" style="border-bottom:none;">
+                        <div>
+                            <p style="font-size:13px; font-weight:500;">Create Silicone Mold</p>
+                            <p style="font-size:11px; color:var(--gold);">For serial lost-wax injection (+ €30)</p>
+                        </div>
+                        <label class="switch"><input type="checkbox" id="gomma" onchange="calculatePrice()"><span class="slider"></span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="summary">
+            <h3>Your Order</h3>
+            <div class="price-row"><span>File:</span><span id="summary-file" style="color:#fff; font-weight:500;">None</span></div>
+            <div class="price-row"><span>3D Printing:</span><span id="summary-stampa">€ 0.00</span></div>
+            <div class="price-row"><span>File Check:</span><span id="summary-controllo">€ 0.00</span></div>
+            <div class="price-row"><span>Molding:</span><span id="summary-gomma">€ 0.00</span></div>
+            <div class="price-total"><span>Estimated Total</span><span id="summary-total">€ 0.00</span></div>
+            <button class="btn-order" onclick="gestisciInvioOrdine()">Send to Laboratory</button>
+        </div>
+    </div>
+    <script>
+        function updateFile(input) {
+            const name = input.files && input.files.length > 0 ? input.files.name : "None";
+            document.getElementById('file-text').innerText = name;
+            document.getElementById('summary-file').innerText = name;
+            calculatePrice();
+        }
+        function calculatePrice() {
+            const sel = document.getElementById('resina');
+            const pri = parseFloat(sel.options[sel.selectedIndex].getAttribute('data-price'));
+            const qty = parseInt(document.getElementById('quantita').value) || 1;
+            const ctrl = document.getElementById('controllo').checked ? 10 : 0;
+            const gom = document.getElementById('gomma').checked ? 30 : 0;
+            const totStampa = pri * qty;
+            document.getElementById('summary-stampa').innerText = "€ " + totStampa.toFixed(2);
+            document.getElementById('summary-controllo').innerText = "€ " + ctrl.toFixed(2);
+            document.getElementById('summary-gomma').innerText = "€ " + gom.toFixed(2);
+            document.getElementById('summary-total').innerText = "€ " + (totStampa + ctrl + gom).toFixed(2);
+        }
+        function gestisciInvioOrdine() {
+            if (document.getElementById('controllo').checked) {
+                alert("Order Registered!\n\nOur technician will verify the STL mesh. If structural errors are found, you will receive a CAD repair quote before printing.");
+            } else {
+                alert("Order Registered!\n\nThe file will be printed as submitted. The laboratory is not responsible for structural failures of the original file.");
+            }
+        }
+        calculatePrice();
+    </script>
+</body>
+</html>
