@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specifiche Tecniche Prototipazione 3D e Standard Orafi | AURA 3D</title>
+    <meta name="description" content="Atelier di prototipazione orafa. Stampa 3D in resina calcinabile a zero residuo per cera persa, microfusione metalli preziosi e taglio gomme siliconiche a Valenza.">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root { --bg:#111215; --card:rgba(18,19,28,0.45); --gold:#E5C483; --text:#F4F4F6; --border:rgba(229,196,131,0.25); }
+        body { background:var(--bg) url('https://picsum.photos') no-repeat center center fixed; background-size:cover; color:var(--text); font-family:'Montserrat',sans-serif; letter-spacing:0.5px; }
+        header { padding:20px 5%; border-bottom:1px solid var(--border); background:rgba(17,18,21,0.8); backdrop-filter:blur(8px); display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-family:'Playfair Display',serif; font-size:24px; letter-spacing:3px; text-decoration:none; color:#fff; }
+        .logo span { color:var(--gold); font-size:11px; vertical-align:super; }
+        nav a { color:#D1D4DC; text-decoration:none; font-size:11px; text-transform:uppercase; font-weight:600; }
+        .container { max-width:900px; margin:40px auto; padding:0 5%; }
+        h1 { font-family:'Playfair Display',serif; font-size:30px; margin-bottom:10px; text-align:center; }
+        .sub { color:#fff; font-size:13px; margin-bottom:40px; text-align:center; }
+        .panel { background:var(--card); padding:35px; border:1px solid var(--border); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); box-shadow:0 20px 50px rgba(0,0,0,0.5); margin-bottom:25px; }
+        h2 { font-family:'Playfair Display',serif; font-size:20px; color:var(--gold); margin-bottom:15px; border-bottom:1px solid rgba(229,196,131,0.2); padding-bottom:5px; }
+        h3 { font-size:13px; font-weight:600; margin:15px 0 5px; color:#fff; text-transform:uppercase; }
+        p, ul { color:#D1D4DC; font-size:13px; line-height:1.6; margin-bottom:12px; }
+        ul { margin-left:20px; }
+        li { margin-bottom:4px; }
+        .tag-box { display:flex; flex-wrap:wrap; gap:6px; background:rgba(0,0,0,0.4); padding:20px; border:1px solid var(--border); }
+        .tag { font-size:9px; background:rgba(229,196,131,0.1); color:var(--gold); padding:4px 8px; text-transform:uppercase; font-weight:600; text-decoration:none; }
+        .tag:hover { background:var(--gold); color:#111215; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="./index.html" class="logo">AURA<span>3D</span></a>
+        <nav><a href="./index.html">← Torna all'Atelier</a></nav>
+    </header>
+    
+    <div class="container">
+        <h1>Specifiche Tecniche e Standard Orafi</h1>
+        <p class="sub">Guida ai processi di prototipazione 3D, microfusione a cera persa e gommatura per l'alta gioielleria.</p>
+        
+        <div class="panel">
+            <h2>Modellazione CAD Gioielli e Riparazione Mesh</h2>
+            <p>Il nostro reparto tecnico esegue lo sviluppo e la correzione di file STL, 3DM e OBJ per l'alta gioielleria. Ottimizziamo le mesh poligonali correggendo bordi aperti, intersezioni nocive e normali invertite prima della stampa 3D [shopping].</p>
+            <h3>Standard di Incassatura Gemme e Manifattura:</h3>
+            <ul>
+                <li><strong>Compensazione dei Ritiri:</strong> Calcolo del ritiro termico lineare del metallo prezioso in fase di microfusione (oro giallo, oro bianco al palladio, oro rosa 18kt, platino 950 e argento 925).</li>
+                <li><strong>Ingegnerizzazione Castoni:</strong> Modellazione ottimizzata per incassatura a griffe, pavé di diamanti, calibrazione spessori per incassato a granette, binario, scavo e castone battuto.</li>
+                <li><strong>Spessori Minimi di Finitura:</strong> Pareti d'oro e gambi anello calcolati a partire da 0.8mm per consentire una perfetta smerigliatura, limatura e lucidatura finale al banco orafo.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h2>Service Stampa 3D SLA / DLP ad Alta Risoluzione</h2>
+            <p>Utilizziamo stampanti professionali (Solidscape, Formlabs Form 4B, Asiga) con precisione micrometrica sull'asse Z (layer da 16 micron). Questo processo elimina le linee di strato, restituendo superfici lisce pronte per i maestri incassatori.</p>
+            <h3>Chimica dei Materiali Calcinabili:</h3>
+            <ul>
+                <li><strong>Resina 100% Calcinabile (Zero Residuo):</strong> Formulazione a base di cera liquida. Garantisce uno svuotamento perfetto del cilindro di gesso refrattario durante la cottura in forno da sbrunitura, eliminando porosità e inclusioni carboniose.</li>
+                <li><strong>Resina Grigia HD per Master:</strong> Polimero rigido ad alta resistenza termica (>140°C), progettato per resistere alla pressione della pressa vulcanizzatrice senza deformazioni strutturali.</li>
+            </ul>
+        </div>
+
+        <div class="panel">
+            <h2>Creazione Gomme Siliconiche e Cera Persa</h2>
+            <p>Realizziamo stampi di precisione studiando i canali di colata (sprue) e gli sfiati dell'aria per azzerare le bave di cera e le bolle d'aria all'interno degli iniettori digitali sottovuoto.</p>
+            <h3>Metodologie di Gommatura in Laboratorio:</h3>
+            <ul>
+                <li><strong>Gomme a Caldo (Siliconi Castaldo):</strong> Vulcanizzazione a pressione controllata tramite presse pneumatiche. Massima memoria elastica e resistenza alla lacerazione per riproduzioni seriali in cera.</li>
+                <li><strong>Gomme a Freddo (Silicone Liquido RTV):</strong> Siliconi d'addition a ritiro zero con durezza Shore 45A. Perfetti per gommare direttamente i master fragili in resina 3D, garantendo un taglio a bisturi millimetrico.</li>
+            </ul>
+        </div>
+
+        <!-- TAG DI GEOLOCALIZZAZIONE NEI DISTRETTI ORAFI ITALIANI -->
+        <h3 style="margin-bottom:10px; font-size:11px; color:var(--gold);">Dizionario Tecnico e Localizzazione Service Orafo</h3>
+        <div class="tag-box">
+            <a href="./preventivo-rapido.html" class="tag">stampa 3d gioielli valenza</a>
+            <a href="./preventivo-rapido.html" class="tag">service resina calcinabile vicenza</a>
+            <a href="./richiesta-cad.html" class="tag">modellazione cad gioielleria arezzo</a>
+            <a href="./preventivo-rapido.html" class="tag">creazione gomme cera persa milano</a>
+            <a href="./preventivo-rapido.html" class="tag">vulcanizzazione gomme castaldo napoli</a>
+            <a href="./richiesta-cad.html" class="tag">progettazione gioielli 3d torino</a>
+            <a href="./preventivo-rapido.html" class="tag">riparazione file stl gioielleria</a>
+            <a href="./preventivo-rapido.html" class="tag">microfusione oro bianco palladio</a>
+            <a href="./preventivo-rapido.html" class="tag">fusione platino cera persa</a>
+            <a href="./preventivo-rapido.html" class="tag">iniettore cera sottovuoto digitale</a>
+            <a href="./preventivo-rapido.html" class="tag">silicone liquido bicomponente rtv</a>
+            <a href="./preventivo-rapido.html" class="tag">durezza shore 45a stampi orafo</a>
+            <a href="./richiesta-cad.html" class="tag">disegno gioielli rhino gold matrix</a>
+            <a href="./preventivo-rapido.html" class="tag">prototipazione rapida anelli fidanzamento</a>
+            <a href="./preventivo-rapido.html" class="tag">incassatura pave diamanti tolleranze</a>
+        </div>
+    </div>
+</body>
+</html>
