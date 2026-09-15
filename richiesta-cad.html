@@ -42,7 +42,11 @@
     <div class="container">
         <h1>Studio di Progettazione</h1>
         <p class="sub">Richiedi un preventivo di modellazione CAD calcolando spessori, ritiri e gemme.</p>
-        <form class="panel" onsubmit="event.preventDefault(); alert('Specifiche inviate con successo!');">
+       <!-- NUOVO MODULO ATTIVO CON LA TUA CHIAVE REALZZA -->
+<form class="panel" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="access_key" value="34201526-205e-4555-8483-06c149aa382d">
+    <input type="hidden" name="subject" value="AURA 3D JEWELRY: Nuova richiesta preventivo CAD">
+
             <div class="form-row">
                 <div class="form-group"><label>Nome / Azienda *</label><input type="text" required placeholder="Es. Oreficeria Rossi"></div>
                 <div class="form-group"><label>Email *</label><input type="email" required placeholder="rossi@esempio.com"></div>
